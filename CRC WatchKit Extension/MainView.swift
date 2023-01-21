@@ -23,7 +23,7 @@ struct MainView: View {
                         Text("Connecting...").foregroundColor(.green)
                         ProgressView()
                         Spacer()
-                    }
+                    }.onAppear() { bleManager.startScanning() }
                 }
             }
             else {
@@ -31,6 +31,5 @@ struct MainView: View {
                     .foregroundColor(.red)
             }
         }
-        .onAppear() { bleManager.startScanning() }
     }
 }
