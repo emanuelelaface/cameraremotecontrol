@@ -1,34 +1,46 @@
-//
-//  ContentView.swift
-//  CRC WatchKit Extension
-//
-//  Created by Emanuele Laface on 2021-11-21.
-//
-
 import SwiftUI
 
 struct MainView: View {
-    @ObservedObject var bleManager = BLEManager()
-    @State private var selectedDate = Date()
-    
+    @StateObject private var bleManager = BLEManager()
+    @Environment(\.scenePhase) private var scenePhase
+    @State private var cameraMode: CameraMode = .immediate
+
     var body: some View {
-        ZStack {
-            if (bleManager.isSwitchedOn) {
-                if (bleManager.isConnected) {
-                    CRCView(bleManager: bleManager)
-                }
-                else {
-                    VStack{
-                        Spacer()
-                        Text("Connecting...").foregroundColor(.green)
-                        ProgressView()
-                        Spacer()
-                    }.onAppear() { bleManager.startScanning() }
+        Group {
+            if bleManager.state == .ready {
+                CRCView(bleManager: bleManager, cameraMode: $cameraMode)
+            } else {
+                ScrollView {
+                    VStack(spacing: 12) {
+                        Image(systemName: "camera")
+                            .font(.title2)
+                        Text(bleManager.state.message)
+                            .multilineTextAlignment(.center)
+                        if bleManager.state.isWorking {
+                            ProgressView()
+                        }
+                        if bleManager.state == .scanning {
+                            Text("Set the camera's Bluetooth function to Remote, then select Pairing.")
+                                .font(.footnote)
+                                .foregroundStyle(.secondary)
+                                .multilineTextAlignment(.center)
+                        }
+                        if bleManager.state.canRetry {
+                            Button("Retry") { bleManager.retry() }
+                        }
+                    }
+                    .padding(.horizontal)
                 }
             }
-            else {
-                Text("Bluetooth is NOT swidtched on")
-                    .foregroundColor(.red)
+        }
+        .navigationTitle("CRC")
+        .disabled(scenePhase != .active)
+        .task(id: scenePhase) {
+            switch scenePhase {
+            case .active: bleManager.setActive(true)
+            case .background: bleManager.setActive(false)
+            case .inactive: break // Keep pairing alive while a system permission alert is open.
+            @unknown default: bleManager.setActive(false)
             }
         }
     }

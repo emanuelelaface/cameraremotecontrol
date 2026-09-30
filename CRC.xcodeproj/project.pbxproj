@@ -12,12 +12,10 @@
 		858AA96F274A5B980029F862 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 858AA96E274A5B980029F862 /* Assets.xcassets */; };
 		858AA97A274A5B980029F862 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858AA979274A5B980029F862 /* MainView.swift */; };
 		858AA97C274A5B980029F862 /* CRCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858AA97B274A5B980029F862 /* CRCApp.swift */; };
-		858AA97E274A5B980029F862 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858AA97D274A5B980029F862 /* ComplicationController.swift */; };
 		858AA980274A5B990029F862 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 858AA97F274A5B990029F862 /* Assets.xcassets */; };
 		858AA983274A5B990029F862 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 858AA982274A5B990029F862 /* Preview Assets.xcassets */; };
 		858AA993274A5C760029F862 /* BLEClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858AA992274A5C760029F862 /* BLEClass.swift */; };
 		858AA995274A5DF70029F862 /* CanonParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858AA994274A5DF70029F862 /* CanonParams.swift */; };
-		85B7EB77275037ED00C9472F /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B7EB76275037ED00C9472F /* ExtensionDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,13 +49,10 @@
 		858AA96E274A5B980029F862 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		858AA979274A5B980029F862 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		858AA97B274A5B980029F862 /* CRCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRCApp.swift; sourceTree = "<group>"; };
-		858AA97D274A5B980029F862 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		858AA97F274A5B990029F862 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		858AA982274A5B990029F862 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		858AA984274A5B990029F862 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		858AA992274A5C760029F862 /* BLEClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEClass.swift; sourceTree = "<group>"; };
 		858AA994274A5DF70029F862 /* CanonParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanonParams.swift; sourceTree = "<group>"; };
-		85B7EB76275037ED00C9472F /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		85DB120D2757F996006C45C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,12 +100,9 @@
 				858AA97B274A5B980029F862 /* CRCApp.swift */,
 				858AA979274A5B980029F862 /* MainView.swift */,
 				85828DBF27561E190053EC84 /* CRCView.swift */,
-				85B7EB76275037ED00C9472F /* ExtensionDelegate.swift */,
 				858AA992274A5C760029F862 /* BLEClass.swift */,
 				858AA994274A5DF70029F862 /* CanonParams.swift */,
-				858AA97D274A5B980029F862 /* ComplicationController.swift */,
 				858AA97F274A5B990029F862 /* Assets.xcassets */,
-				858AA984274A5B990029F862 /* Info.plist */,
 				858AA981274A5B990029F862 /* Preview Content */,
 			);
 			path = "CRC WatchKit Extension";
@@ -233,11 +225,9 @@
 			files = (
 				858AA995274A5DF70029F862 /* CanonParams.swift in Sources */,
 				858AA97C274A5B980029F862 /* CRCApp.swift in Sources */,
-				85B7EB77275037ED00C9472F /* ExtensionDelegate.swift in Sources */,
 				858AA97A274A5B980029F862 /* MainView.swift in Sources */,
 				858AA993274A5C760029F862 /* BLEClass.swift in Sources */,
 				85828DC027561E190053EC84 /* CRCView.swift in Sources */,
-				858AA97E274A5B980029F862 /* ComplicationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,10 +293,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = CRC/Info.plist;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -358,9 +348,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = CRC/Info.plist;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -373,31 +363,29 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2022012101;
+				CURRENT_PROJECT_VERSION = 2026093001;
 				DEVELOPMENT_TEAM = AM5PREL8LG;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
-				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Connect to camera";
-				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Connect to Camera";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "CRC uses Bluetooth to connect to your Canon camera and control the shutter, focus, and zoom.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKApplication = YES;
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = scumm.it.CRC.watchkitapp;
 				PRODUCT_NAME = CRC;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -406,31 +394,29 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2022012101;
+				CURRENT_PROJECT_VERSION = 2026093001;
 				DEVELOPMENT_TEAM = AM5PREL8LG;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
-				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Connect to camera";
-				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Connect to Camera";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "CRC uses Bluetooth to connect to your Canon camera and control the shutter, focus, and zoom.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKApplication = YES;
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = scumm.it.CRC.watchkitapp;
 				PRODUCT_NAME = CRC;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
@@ -438,14 +424,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2022012101;
+				CURRENT_PROJECT_VERSION = 2026093001;
 				DEVELOPMENT_TEAM = AM5PREL8LG;
-				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Connect to Camera";
-				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Connect to Camera";
-				MARKETING_VERSION = 1.1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CRC/Info.plist;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = scumm.it.CRC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -453,14 +439,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2022012101;
+				CURRENT_PROJECT_VERSION = 2026093001;
 				DEVELOPMENT_TEAM = AM5PREL8LG;
-				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Connect to Camera";
-				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Connect to Camera";
-				MARKETING_VERSION = 1.1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CRC/Info.plist;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = scumm.it.CRC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};

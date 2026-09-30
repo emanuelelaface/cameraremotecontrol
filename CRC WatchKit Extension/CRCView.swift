@@ -1,49 +1,40 @@
-//
-//  CRCView.swift
-//  CRC WatchKit Extension
-//
-//  Created by Emanuele Laface on 2021-11-30.
-//
-
 import SwiftUI
 
 struct CRCView: View {
-    @State var bleManager: BLEManager
-    @State private var RemoteSwitch = SwitchImmediate
-        
+    @ObservedObject var bleManager: BLEManager
+    @Binding var cameraMode: CameraMode
+
     var body: some View {
-        VStack{
-            Spacer()
-            Picker("Camera Mode", selection: $RemoteSwitch) {
-                Text("Immediate").tag(SwitchImmediate)
-                Text("2s Delay").tag(SwitchDelay)
-                Text("Video").tag(SwitchVideo)
+        ScrollView {
+            VStack(spacing: 8) {
+                Picker("Camera Mode", selection: $cameraMode) {
+                    ForEach(CameraMode.allCases) { mode in
+                        Text(mode.title).tag(mode)
+                    }
+                }
+                .frame(height: 64)
+                .frame(maxWidth: .infinity)
+
+                HStack(spacing: 6) {
+                    Button("T") { send(.tele) }
+                        .accessibilityLabel("Zoom in")
+                    Button("AF") { send(.focus) }
+                        .accessibilityLabel("Autofocus")
+                    Button("W") { send(.wide) }
+                        .accessibilityLabel("Zoom out")
+                }
+
+                Button(action: { send(.shutter) }) {
+                    Label(cameraMode == .video ? "Record / Stop" : "Shutter", systemImage: "camera.shutter.button")
+                        .frame(maxWidth: .infinity)
+                }
+                .tint(.green)
             }
-            .frame(width: .infinity, height: 64)
-            Spacer()
-            HStack {
-                Button(action:{
-                    bleManager.clickButton(mode: RemoteSwitch, button: ButtonTele)
-                })
-                { Text("T") }
-                Spacer()
-                Button(action:{
-                    bleManager.clickButton(mode: RemoteSwitch, button: ButtonFocus)
-                })
-                { Text("AF") }
-                Spacer()
-                Button(action:{
-                    bleManager.clickButton(mode: RemoteSwitch, button: ButtonWide)
-                })
-                { Text("W") }
-            }
-            Spacer()
-            Button(action:{
-                bleManager.clickButton(mode: RemoteSwitch, button: ButtonRelease)
-            })
-            { Text("Shutter") }
+            .disabled(!bleManager.canSendCommand)
         }
-        .navigationBarHidden(true)
-        .ignoresSafeArea()
+    }
+
+    private func send(_ button: CameraButton) {
+        bleManager.clickButton(mode: cameraMode, button: button)
     }
 }

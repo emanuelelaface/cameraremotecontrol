@@ -1,23 +1,95 @@
-//
-//  CanonParams.swift
-//  CRC WatchKit Extension
-//
-//  Created by Emanuele Laface on 2021-11-21.
-//
-
 import Foundation
 
-let SwitchImmediate = 0b00001100
-let SwitchDelay     = 0b00000100
-let SwitchVideo     = 0b00001000
+enum CameraMode: UInt8, CaseIterable, Identifiable {
+    case immediate = 0x0C
+    case delay = 0x04
+    case video = 0x08
 
-let ButtonRelease   = 0b10000000
-let ButtonFocus     = 0b01000000
-let ButtonTele      = 0b00100000
-let ButtonWide      = 0b00010000
+    var id: UInt8 { rawValue }
 
-let AppName = Data([3])//,67,82,67,32,65,112,112,108,101,32,87,97,116,99,104]) // CRC Apple Watch
+    var title: String {
+        switch self {
+        case .immediate: return "Immediate"
+        case .delay: return "2s Delay"
+        case .video: return "Video"
+        }
+    }
+}
 
-let UUIDService               = "00050000-0000-1000-0000-D8492FFFA821"
-let UUIDCharacteristicPairing = "00050002-0000-1000-0000-D8492FFFA821"
-let UUIDCharacteristicEvent   = "00050003-0000-1000-0000-D8492fffA821"
+enum CameraButton: UInt8, CaseIterable {
+    case shutter = 0x80
+    case focus = 0x40
+    case tele = 0x20
+    case wide = 0x10
+}
+
+enum CanonRemote {
+    static let serviceUUID = "00050000-0000-1000-0000-D8492FFFA821"
+    static let pairingUUID = "00050002-0000-1000-0000-D8492FFFA821"
+    static let eventUUID = "00050003-0000-1000-0000-D8492FFFA821"
+
+    // Keep the name empty: sending a name can hang the EOS R's Bluetooth
+    // after a camera restart (see the original project's protocol notes).
+    static let pairingPacket = Data([0x03])
+    // Preserve the original, camera-tested neutral packet in every mode.
+    static let releasePacket = Data([0x0C])
+}
+
+/// Tracks one button pulse, including Bluetooth backpressure. The hold starts
+/// only when the press is sent, and a release always precedes a new press.
+struct RemoteCommand {
+    private enum Phase {
+        case idle
+        case pressPending(Data)
+        case holding
+        case releasePending
+    }
+
+    private var phase: Phase = .idle
+
+    var isBusy: Bool {
+        if case .idle = phase { return false }
+        return true
+    }
+
+    var pendingPacket: Data? {
+        switch phase {
+        case .pressPending(let packet): return packet
+        case .releasePending: return CanonRemote.releasePacket
+        case .idle, .holding: return nil
+        }
+    }
+
+    @discardableResult
+    mutating func begin(mode: CameraMode, button: CameraButton) -> Bool {
+        guard !isBusy else { return false }
+        phase = .pressPending(Data([mode.rawValue | button.rawValue]))
+        return true
+    }
+
+    /// Returns true when the caller must start the 60 ms hold timer.
+    mutating func didSendPacket() -> Bool {
+        switch phase {
+        case .pressPending:
+            phase = .holding
+            return true
+        case .releasePending:
+            phase = .idle
+        case .idle, .holding:
+            break
+        }
+        return false
+    }
+
+    mutating func release() {
+        switch phase {
+        case .holding: phase = .releasePending
+        case .pressPending: phase = .idle // Discard unsent presses when leaving the app.
+        case .idle, .releasePending: break
+        }
+    }
+
+    mutating func reset() {
+        phase = .idle
+    }
+}
